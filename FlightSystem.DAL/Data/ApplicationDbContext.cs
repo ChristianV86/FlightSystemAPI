@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FlightSystem.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,10 @@ namespace FlightSystem.DAL.Data
         {
 
         }
+
+        public DbSet<Flight> Fligths { get; set; }
+        public DbSet<Journey> Journeys { get; set; }
+        public DbSet<Transport> Transports { get; set; }
+        public DbSet<JourneyFlight> JourneyFlights { get; set; }          
     }
 }

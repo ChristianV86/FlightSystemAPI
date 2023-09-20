@@ -9,11 +9,6 @@ namespace FlightSystem.DAL.Models
 {
     public class Transport
     {
-        [Key]
-        public int Id { get; set; }
-
-        public string FlightCarrier { get; set; }
-
-        public string FlightNumber { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlightSystem.BLL\FlightSystem.BLL.csproj" />
+    <ProjectReference Include="..\FlightSystem.DAL\FlightSystem.DAL.csproj" />
   </ItemGroup>
 
 </Project>

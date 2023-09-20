@@ -9,10 +9,7 @@ using System.Threading.Tasks;
 namespace FlightSystem.DAL.Models
 {
     public class JourneyFlight
-    {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
+    {      
         public int JourneyId { get; set; }
 
         [ForeignKey("JourneyId")]
@@ -21,6 +18,6 @@ namespace FlightSystem.DAL.Models
         public int FlightId { get; set; }
 
         [ForeignKey("FlightId")]
-        public Fligth Fligth { get; set; }
+        public Flight Fligth { get; set; }
     }
 }
