@@ -19,10 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlightSystem.BLL\FlightSystem.BLL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\FlightSystem.DAL\FlightSystem.DAL.csproj" />
   </ItemGroup>
 
 </Project>
