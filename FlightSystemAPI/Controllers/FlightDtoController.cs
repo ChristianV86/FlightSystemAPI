@@ -27,7 +27,7 @@ namespace FlightSystem.WebAPI.Controllers
             {
                 return BadRequest();
             }
-            var flight = FlightStore.flightList.FirstOrDefault(f => f.FlightNumber == id);            
+            var flight = FlightStore.flightList.FirstOrDefault(f => f.Id == id);            
             
             if(flight == null)
             {
@@ -61,17 +61,17 @@ namespace FlightSystem.WebAPI.Controllers
             {
                 return BadRequest(flightDto);
             }
-            if(flightDto.FlightNumber > 0)
+            if(flightDto.Id > 0)
             {
                 // We prevent a BadRequest from being called when an internal error is generated
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
             // We capture the id of the next record and add 1 to it so that it is created automatically and we add a new record to the list
-            flightDto.FlightNumber = FlightStore.flightList.OrderByDescending(f => f.FlightNumber).FirstOrDefault().FlightNumber + 1;
+            flightDto.Id = FlightStore.flightList.OrderByDescending(f => f.Id).FirstOrDefault().Id + 1;
             FlightStore.flightList.Add(flightDto);
             //return Ok(flightDto);
             // We create and call the route so that it returns the id that we are passing to it
-            return CreatedAtRoute("GetFlight", new {id = flightDto.FlightNumber}, flightDto);
+            return CreatedAtRoute("GetFlight", new {id = flightDto.Id}, flightDto);
         }
     }
 }
