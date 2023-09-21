@@ -18,6 +18,8 @@ namespace FlightSystem.WebAPI.Controllers
 
         // We get the data from the external API
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetExternalData()
         {
             var externalData = await _externalApiService.GetExternalDataAsync();
