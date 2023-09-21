@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 
 namespace FlightSystem.DAL.Repository
 {
-    public class FlightRepository : GenericRepository<Flight>, IFlightRepository
+    public class JourneyRepository: GenericRepository<Journey>, IJourneyRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;       
 
-        public FlightRepository(ApplicationDbContext context) :base(context)
+        public JourneyRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
-        public async Task<Flight> Update(Flight entity)
+
+        public async Task<Journey> Update(Journey entity)
         {
-            _context.Fligths.Update(entity);
+            _context.Journeys.Update(entity);
             await _context.SaveChangesAsync();
             return entity;
         }

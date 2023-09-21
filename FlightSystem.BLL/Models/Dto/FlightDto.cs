@@ -11,18 +11,20 @@ namespace FlightSystem.BLL.Models.Dto
     public class FlightDto
     {
         [Required(ErrorMessage = "{0} es Obligatorio")]        
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "{0} es Obligatorio")]
+        [MaxLength(3)]
         public string DepartureStation { get; set; }
 
-        [Required(ErrorMessage = "{0} es Obligatorio")]        
+        [Required(ErrorMessage = "{0} es Obligatorio")]
+        [MaxLength(3)]
         public string ArrivalStation { get; set; }
-
-        [Required(ErrorMessage = "{0} es Obligatorio")]        
-        public string FlightCarrier { get; set; }
-
-        [Required(ErrorMessage = "{0} es Obligatorio")]        
-        public int FlightNumber { get; set; }
 
         [Required(ErrorMessage = "{0} es Obligatorio")]
         public double Price { get; set; }
+
+        [Required(ErrorMessage = "{0} es Obligatorio")]        
+        public List<TransportDto> Transports { get; set; }             
     }
 }

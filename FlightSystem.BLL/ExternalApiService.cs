@@ -24,7 +24,9 @@ namespace FlightSystem.BLL
             try
             {
                 // Realizar una solicitud GET a la API externa
-                var response = await _httpClient.GetAsync("https://recruiting-api.newshore.es/api/flights/0");
+                //var response = await _httpClient.GetAsync("https://recruiting-api.newshore.es/api/flights/0");
+                //var response = await _httpClient.GetAsync("https://recruiting-api.newshore.es/api/flights/1");
+                var response = await _httpClient.GetAsync("https://recruiting-api.newshore.es/api/flights/2");
 
                 if (response.IsSuccessStatusCode)
                 {
