@@ -14,12 +14,12 @@ namespace FlightSystem.WebAPI.DataStore
                             Flights = new List<FlightDto> { new FlightDto {DepartureStation = "MZL", 
                                                                            ArrivalStation = "JFK", 
                                                                            Price = 1000,
-                                                                           Transports = new List<TransportDto> { new TransportDto { FlightCarrier = "AV", FlightNumber = 8020}}
+                                                                           Transports = new List<TransportDto> { new TransportDto { FlightCarrier = "AV", FlightNumber = "8020" } }
                                                            },
                                                            new FlightDto {DepartureStation = "JFK",
                                                                           ArrivalStation = "BCN",
                                                                           Price = 1000,
-                                                                          Transports = new List<TransportDto> {new TransportDto { FlightCarrier = "AV", FlightNumber = 8040}}
+                                                                          Transports = new List<TransportDto> {new TransportDto { FlightCarrier = "AV", FlightNumber = "8040" } }
                                                            }
                             }                            
             }

@@ -10,14 +10,10 @@ namespace FlightSystem.BLL.Models.Dto
 {
     public class TransportDto
     {        
-        [Required(ErrorMessage = "{0} es Obligatorio")]
-        [MaxLength(2)]
+        [Required(ErrorMessage = "{0} is mandatory")]        
         public string FlightCarrier { get; set; }
 
-        [Required(ErrorMessage = "{0} es Obligatorio")]
-        public int FlightNumber { get; set; }
-
-        [ForeignKey("FlightNumber")]
-        public FlightDto FlightId { get; set;}
+        [Required(ErrorMessage = "{0} is mandatory")]
+        public string FlightNumber { get; set; }       
     }
 }

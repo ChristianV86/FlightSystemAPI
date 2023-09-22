@@ -9,19 +9,32 @@ using System.Threading.Tasks;
 namespace FlightSystem.DAL.Models
 {
     public class Flight
-    {       
-        [MaxLength(3)]
-        public string DepartureStation { get; set; }
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
-        [MaxLength(3)]
-        public string ArrivalStation { get; set; }
+        [Required(ErrorMessage = "{0} is mandatory")]
+        [MaxLength(3, ErrorMessage = "Maximum 3 Characters")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only letters allowed.")]
+        public string Origin { get; set; }
 
-        [MaxLength(2)]
-        public string FlightCarrier { get; set; }
+        [Required(ErrorMessage = "{0} is mandatory")]
+        [MaxLength(3, ErrorMessage = "Maximum 3 Characters")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only letters allowed.")]
+        public string Destination { get; set; }
 
-        [MaxLength(4)]
-        public int FlightNumber { get; set; }
+        [Required(ErrorMessage = "{0} is mandatory")]
+        public double Price { get; set; }
 
-        public double Price { get; set; }                
+        [Required(ErrorMessage = "{0} is mandatory")]
+        public string FlightNumber { get; set; }
+
+        [ForeignKey("FlightNumber")]
+        public Transport Transport { get; set; }
+
+
+
+
     }
 }

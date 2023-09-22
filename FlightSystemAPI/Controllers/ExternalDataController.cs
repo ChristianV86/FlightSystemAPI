@@ -10,10 +10,12 @@ namespace FlightSystem.WebAPI.Controllers
     {
         // We inject access service to external API
         private readonly ExternalApiService _externalApiService;
+        private readonly ILogger<ExternalDataController> _logger;
 
-        public ExternalDataController(ExternalApiService externalApiService)
+        public ExternalDataController(ExternalApiService externalApiService, ILogger<ExternalDataController> logger )
         {
             _externalApiService = externalApiService;
+            _logger = logger;
         }
 
         // We get the data from the external API
@@ -26,11 +28,13 @@ namespace FlightSystem.WebAPI.Controllers
 
             if (externalData != null)
             {
+                _logger.LogInformation("Data is being fetched from external API.");
                 return Ok(externalData);
             }
             else
             {
-                return BadRequest("No se pudo obtener los datos de la API externa.");
+                _logger.LogInformation("There was a problem taking data from the external API.");
+                return BadRequest();
             }
         }
     }

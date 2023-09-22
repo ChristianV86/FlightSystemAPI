@@ -23,15 +23,17 @@ namespace FlightSystem.BLL
         {
             try
             {
-                // Realizar una solicitud GET a la API externa
+                // Make a GET request to the external API
                 //var response = await _httpClient.GetAsync("https://recruiting-api.newshore.es/api/flights/0");
                 //var response = await _httpClient.GetAsync("https://recruiting-api.newshore.es/api/flights/1");
                 var response = await _httpClient.GetAsync("https://recruiting-api.newshore.es/api/flights/2");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // Leer y retornar los datos
+                    // Read and return data
                     var json =  await response.Content.ReadAsStringAsync();
+
+                    // We deserialize the data
                     var result = JsonConvert.DeserializeObject<List<Flight>>(json);
                     return result;
                 }

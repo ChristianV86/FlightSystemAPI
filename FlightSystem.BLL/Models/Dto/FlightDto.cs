@@ -9,22 +9,17 @@ using System.Threading.Tasks;
 namespace FlightSystem.BLL.Models.Dto
 {
     public class FlightDto
-    {
-        [Required(ErrorMessage = "{0} es Obligatorio")]        
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "{0} es Obligatorio")]
-        [MaxLength(3)]
+    {       
+        [Required(ErrorMessage = "{0} is mandatory")]        
         public string DepartureStation { get; set; }
 
-        [Required(ErrorMessage = "{0} es Obligatorio")]
-        [MaxLength(3)]
+        [Required(ErrorMessage = "{0} is mandatory")]
         public string ArrivalStation { get; set; }
 
-        [Required(ErrorMessage = "{0} es Obligatorio")]
+        [Required(ErrorMessage = "{0} is mandatory")]
         public double Price { get; set; }
 
-        [Required(ErrorMessage = "{0} es Obligatorio")]        
+        [Required(ErrorMessage = "{0} is mandatory")]        
         public List<TransportDto> Transports { get; set; }             
     }
 }
