@@ -10,5 +10,6 @@ namespace FlightSystem.DAL.Repository.IRepository
     public interface IFlightRepository: IGenericRepository<Flight>
     {
         Task<Flight> Update(Flight entity);
+
     }
 }

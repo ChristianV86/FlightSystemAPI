@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlightSystem.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230922005951_AddDatabase_andSystemTables")]
-    partial class AddDatabase_andSystemTables
+    [Migration("20230925012142_CreateDatabaseAndSystemModels")]
+    partial class CreateDatabaseAndSystemModels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,10 +38,6 @@ namespace FlightSystem.DAL.Migrations
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
 
-                    b.Property<string>("FlightNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(4)");
-
                     b.Property<int?>("JourneyId")
                         .HasColumnType("int");
 
@@ -53,13 +49,16 @@ namespace FlightSystem.DAL.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.HasKey("Id");
+                    b.Property<int>("TransportId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("FlightNumber");
+                    b.HasKey("Id");
 
                     b.HasIndex("JourneyId");
 
-                    b.ToTable("Fligths");
+                    b.HasIndex("TransportId");
+
+                    b.ToTable("Flights");
                 });
 
             modelBuilder.Entity("FlightSystem.DAL.Models.Journey", b =>
@@ -113,38 +112,45 @@ namespace FlightSystem.DAL.Migrations
 
             modelBuilder.Entity("FlightSystem.DAL.Models.Transport", b =>
                 {
-                    b.Property<string>("FlightNumber")
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("FlightCarrier")
                         .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("nvarchar(2)");
 
-                    b.HasKey("FlightNumber");
+                    b.Property<string>("FlightNumber")
+                        .IsRequired()
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Transports");
                 });
 
             modelBuilder.Entity("FlightSystem.DAL.Models.Flight", b =>
                 {
-                    b.HasOne("FlightSystem.DAL.Models.Transport", "Transport")
-                        .WithMany()
-                        .HasForeignKey("FlightNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FlightSystem.DAL.Models.Journey", null)
                         .WithMany("Flights")
                         .HasForeignKey("JourneyId");
+
+                    b.HasOne("FlightSystem.DAL.Models.Transport", "Transport")
+                        .WithMany()
+                        .HasForeignKey("TransportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Transport");
                 });
 
             modelBuilder.Entity("FlightSystem.DAL.Models.JourneyFlight", b =>
                 {
-                    b.HasOne("FlightSystem.DAL.Models.Flight", "Fligth")
+                    b.HasOne("FlightSystem.DAL.Models.Flight", "Flight")
                         .WithMany()
                         .HasForeignKey("FlightId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -156,7 +162,7 @@ namespace FlightSystem.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Fligth");
+                    b.Navigation("Flight");
 
                     b.Navigation("Journey");
                 });

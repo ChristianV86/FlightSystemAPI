@@ -17,9 +17,12 @@ namespace FlightSystem.BLL.Models.Dto
         public string ArrivalStation { get; set; }
 
         [Required(ErrorMessage = "{0} is mandatory")]
-        public double Price { get; set; }
+        public string FlightCarrier { get; set; }
 
-        [Required(ErrorMessage = "{0} is mandatory")]        
-        public List<TransportDto> Transports { get; set; }             
+        [Required(ErrorMessage = "{0} is mandatory")]
+        public string FlightNumber { get; set; }
+
+        [Required(ErrorMessage = "{0} is mandatory")]
+        public double Price { get; set; }
     }
 }

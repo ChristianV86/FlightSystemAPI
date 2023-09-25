@@ -19,10 +19,10 @@ namespace FlightSystem.WebAPI.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IEnumerable<FlightDto> GetFlights()
+        public async Task<IEnumerable<FlightDto>> GetFlights()
         {
             _logger.LogInformation("All flights were obtained.");
             return FlightStore.flightList;
-        }        
+        }
     }
 }
