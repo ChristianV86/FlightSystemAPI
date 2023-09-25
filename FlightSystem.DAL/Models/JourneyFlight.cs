@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +24,6 @@ namespace FlightSystem.DAL.Models
         public int FlightId { get; set; }
 
         [ForeignKey("FlightId")]
-        public Flight Fligth { get; set; }
+        public Flight Flight { get; set; }
     }
 }

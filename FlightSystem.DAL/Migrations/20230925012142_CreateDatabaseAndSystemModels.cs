@@ -5,7 +5,7 @@
 namespace FlightSystem.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDatabase_andSystemTables : Migration
+    public partial class CreateDatabaseAndSystemModels : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,39 +29,41 @@ namespace FlightSystem.DAL.Migrations
                 name: "Transports",
                 columns: table => new
                 {
-                    FlightNumber = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
-                    FlightCarrier = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FlightCarrier = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
+                    FlightNumber = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transports", x => x.FlightNumber);
+                    table.PrimaryKey("PK_Transports", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Fligths",
+                name: "Flights",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Origin = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
                     Destination = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
+                    TransportId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    FlightNumber = table.Column<string>(type: "nvarchar(4)", nullable: false),
                     JourneyId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fligths", x => x.Id);
+                    table.PrimaryKey("PK_Flights", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Fligths_Journeys_JourneyId",
+                        name: "FK_Flights_Journeys_JourneyId",
                         column: x => x.JourneyId,
                         principalTable: "Journeys",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Fligths_Transports_FlightNumber",
-                        column: x => x.FlightNumber,
+                        name: "FK_Flights_Transports_TransportId",
+                        column: x => x.TransportId,
                         principalTable: "Transports",
-                        principalColumn: "FlightNumber",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -78,9 +80,9 @@ namespace FlightSystem.DAL.Migrations
                 {
                     table.PrimaryKey("PK_JourneyFlights", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_JourneyFlights_Fligths_FlightId",
+                        name: "FK_JourneyFlights_Flights_FlightId",
                         column: x => x.FlightId,
-                        principalTable: "Fligths",
+                        principalTable: "Flights",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -92,14 +94,14 @@ namespace FlightSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fligths_FlightNumber",
-                table: "Fligths",
-                column: "FlightNumber");
+                name: "IX_Flights_JourneyId",
+                table: "Flights",
+                column: "JourneyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fligths_JourneyId",
-                table: "Fligths",
-                column: "JourneyId");
+                name: "IX_Flights_TransportId",
+                table: "Flights",
+                column: "TransportId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JourneyFlights_FlightId",
@@ -119,7 +121,7 @@ namespace FlightSystem.DAL.Migrations
                 name: "JourneyFlights");
 
             migrationBuilder.DropTable(
-                name: "Fligths");
+                name: "Flights");
 
             migrationBuilder.DropTable(
                 name: "Journeys");
