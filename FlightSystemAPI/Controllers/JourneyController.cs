@@ -15,7 +15,7 @@ using System.Reflection.PortableExecutable;
 
 namespace FlightSystem.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class JourneyController : ControllerBase
     {
@@ -38,23 +38,23 @@ namespace FlightSystem.WebAPI.Controllers
         public async Task<ActionResult<Journey>> GetJourney([StringLength(3, MinimumLength = 3)][RegularExpression(@"^[a-zA-Z]+$")][FromQuery] string origin,
                                                             [StringLength(3, MinimumLength = 3)][RegularExpression(@"^[a-zA-Z]+$")][FromQuery] string destination)
         {
-            var journey = await _journeyRepo.Get(j => j.Origin == origin && j.Destination == destination);
+            var journey = await _journeyRepo.Get(j => j.Origin.ToUpper() == origin.ToUpper() && j.Destination == destination.ToUpper());
 
             try
             {
-                var route = _journeyRepo.GetRoute(origin.ToUpper(), destination.ToUpper());                
+                var routeJourney = _journeyRepo.GetRoute(origin.ToUpper(), destination.ToUpper());                
 
-                if(route == null)
+                if(routeJourney == null)
                 {
-                    return BadRequest(/*"The route could not be calculated."*/);
+                    return BadRequest();
                 }
 
-                if (route.Count == 0)
+                if (routeJourney.Count == 0)
                 {
                     return NoContent();
                 }
                 // Calculate the total price by adding the prices of the flights on the route
-                double journeyPrice = route.Sum(f => f.Price);                
+                double journeyPrice = routeJourney.Sum(jp => jp.Price);
 
                 // We create the response object with the desired information
                 var journeyResponse = new 
@@ -62,8 +62,11 @@ namespace FlightSystem.WebAPI.Controllers
                     Origin = origin,
                     Destination = destination,
                     Price = journeyPrice,
-                    Flights = route
-                };                              
+                    Flights = routeJourney                    
+                };
+
+
+               
 
                 return Ok(journeyResponse);
             }

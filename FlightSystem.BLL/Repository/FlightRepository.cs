@@ -17,11 +17,6 @@ namespace FlightSystem.DAL.Repository
         {
             _context = context;
         }
-        public async Task<Flight> Update(Flight entity)
-        {
-            _context.Flights.Update(entity);
-            await _context.SaveChangesAsync();
-            return entity;
-        }
+        
     }
 }
