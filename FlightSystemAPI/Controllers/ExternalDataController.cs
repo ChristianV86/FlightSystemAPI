@@ -7,7 +7,7 @@ using System.Net;
 
 namespace FlightSystem.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ExternalDataController : ControllerBase
     {

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightSystem.BLL", "FlightS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightSystem.DAL", "FlightSystem.DAL\FlightSystem.DAL.csproj", "{A1F9A45A-C440-44E9-971B-DDE9A2FB995A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiUnitTesting", "WebApiUnitTesting\WebApiUnitTesting.csproj", "{C0C57987-FA10-486A-9B60-C283FDD43C09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A1F9A45A-C440-44E9-971B-DDE9A2FB995A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1F9A45A-C440-44E9-971B-DDE9A2FB995A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1F9A45A-C440-44E9-971B-DDE9A2FB995A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0C57987-FA10-486A-9B60-C283FDD43C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0C57987-FA10-486A-9B60-C283FDD43C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0C57987-FA10-486A-9B60-C283FDD43C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0C57987-FA10-486A-9B60-C283FDD43C09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
